@@ -45,6 +45,12 @@ body {
     gap: 12px;
 }
 
+.quote-actions {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
 .logo {
     margin-bottom: 12px;
 }
