@@ -1,0 +1,61 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: quote-app
+  namespace: quote-k8s-python
+spec:
+  replicas: 1
+  strategy:
+    type: Recreate # a single SQLite file on the PVC can't be shared by two pods at once
+  selector:
+    matchLabels:
+      app: quote-app
+  template:
+    metadata:
+      labels:
+        app: quote-app
+    spec:
+      containers:
+        - name: quote-app
+          image: quote-app:latest
+          imagePullPolicy: Never
+          ports:
+            - containerPort: 8080
+          env:
+            - name: FLASK_CONFIG
+              value: "prod"
+            - name: DATABASE_PATH
+              value: "/data/quotes.db"
+            - name: SEED_USERS_ENABLED
+              value: "true"
+            - name: SECRET_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: quote-session-secret
+                  key: SECRET_KEY
+          volumeMounts:
+            - name: quote-data
+              mountPath: /data
+          resources:
+            requests:
+              memory: "128Mi"
+              cpu: "100m"
+            limits:
+              memory: "256Mi"
+              cpu: "500m"
+          livenessProbe:
+            httpGet:
+              path: /healthz
+              port: 8080
+            initialDelaySeconds: 5
+            periodSeconds: 10
+          readinessProbe:
+            httpGet:
+              path: /healthz
+              port: 8080
+            initialDelaySeconds: 3
+            periodSeconds: 5
+      volumes:
+        - name: quote-data
+          persistentVolumeClaim:
+            claimName: quote-data-pvc

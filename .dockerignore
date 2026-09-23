@@ -1,0 +1,16 @@
+.venv/
+.git/
+.pytest_cache/
+.ruff_cache/
+__pycache__/
+*.pyc
+instance/
+*.db
+*.db-wal
+*.db-shm
+.env
+tests/
+doc/
+k8s/
+scripts/
+.claude/
