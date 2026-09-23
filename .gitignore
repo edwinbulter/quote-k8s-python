@@ -14,3 +14,5 @@ instance/
 *.db-shm
 data/
 .DS_Store
+.idea/
+.vscode/
