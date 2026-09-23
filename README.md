@@ -29,10 +29,15 @@ See the documentation in `doc/`:
 
 ```bash
 uv sync
-uv run flask --app app:create_app run --debug --port 5000
+uv run flask --app app:create_app run --debug --port 5001
 ```
 
-Then open http://localhost:5000/.
+Then open http://localhost:5001/.
+
+> Port 5001, not 5000: on macOS, port 5000 is usually already taken by the
+> AirPlay Receiver (`ControlCenter`), which answers HTTP requests with a bare
+> `403 Forbidden`. If you hit that, either use a different port (as above) or
+> disable AirPlay Receiver under System Settings > General > AirDrop & Handoff.
 
 ### Tests
 

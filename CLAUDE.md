@@ -19,11 +19,15 @@ For the full architecture (components, data model, route table, auth flow) see
 
 ```bash
 uv sync                                              # install dependencies
-uv run flask --app app:create_app run --debug --port 5000   # dev server, live reload
+uv run flask --app app:create_app run --debug --port 5001   # dev server, live reload
 uv run pytest                                        # run tests
 uv run pytest --cov=app                              # with coverage
 uv run ruff check .                                  # lint
 ```
+
+Port 5001, not 5000: on macOS, port 5000 is normally already bound by the
+AirPlay Receiver (`ControlCenter`), which answers with a bare `403
+Forbidden` instead of Flask ever seeing the request.
 
 Dev mode uses a file-backed SQLite DB at `instance/quotes.db` (Flask's default
 instance-relative resolution for a relative `SQLALCHEMY_DATABASE_URI`) unless
@@ -48,6 +52,9 @@ The app is then reachable at `http://localhost/`.
 
 ## Gotchas
 
+- **Port 5000 on macOS** is normally already bound by the AirPlay Receiver
+  (`ControlCenter`), which answers any HTTP request on it with a bare `403
+  Forbidden`. Use `--port 5001` (or any other free port) for the dev server.
 - **`POST /seed-users`** is an unauthenticated dev-only endpoint that seeds
   `admin`/`Admin123!` and `user-1`/`Hello-user-1`. It's gated by the
   `SEED_USERS_ENABLED` env var (defaults on) so it can be disabled outright
