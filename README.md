@@ -39,6 +39,18 @@ Then open http://localhost:5001/.
 > `403 Forbidden`. If you hit that, either use a different port (as above) or
 > disable AirPlay Receiver under System Settings > General > AirDrop & Handoff.
 
+A fresh database has no user accounts yet, so logging in as `admin` or
+`user-1` will fail until you seed them:
+
+```bash
+curl -X POST http://localhost:5001/seed-users
+```
+
+This creates `admin`/`Admin123!` (ADMIN role) and `user-1`/`Hello-user-1`
+(USER role); it's safe to call again later, it skips users that already
+exist. The kind deployment does this automatically as the last step of
+`scripts/setup-kind.sh` - only local dev requires the manual call.
+
 ### Tests
 
 ```bash
