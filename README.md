@@ -24,6 +24,9 @@ See the documentation in `doc/`:
 
 - [`doc/architecture.md`](doc/architecture.md) - components, data model, routes, auth
 - [`doc/local-kind-setup.md`](doc/local-kind-setup.md) - build and run in the local kind cluster
+- [`doc/new-quote-flow.md`](doc/new-quote-flow.md) - a detailed request/response
+  trace of what happens when a logged-in user clicks "New Quote" (also available
+  in [Dutch](doc/new-quote-flow.nl.md))
 
 ### Local development (no Kubernetes)
 
