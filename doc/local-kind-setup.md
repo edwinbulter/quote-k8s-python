@@ -4,7 +4,11 @@ Quick day-to-day workflow for building the app and running it in the local
 `single-node` kind cluster (context `kind-single-node`). Two scripts install
 or remove everything in one command.
 
-See [`architecture.md`](architecture.md) for how the app fits together.
+See [`architecture.md`](architecture.md) for how the app fits together, and
+[`test-api.http`](test-api.http) (with [`http-client.env.json`](http-client.env.json))
+for a ready-made set of manual requests against every route - open it in an
+IDE with an HTTP client (IntelliJ/PyCharm's built-in client, or the VS Code
+"REST Client" extension) and pick the `local-dev` or `local-k8` environment.
 
 ## Prerequisites
 
